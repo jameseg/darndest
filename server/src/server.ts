@@ -23,5 +23,9 @@ connectToDB(ATLAS_URI)
     app.listen(PORT, () => {
       console.log(`Server running at ${PORT}...`);
     });
+
+    app.get('/', (req, res) => {
+      res.send('Hello World');
+    });
   })
   .catch((error: any) => console.error(error));
