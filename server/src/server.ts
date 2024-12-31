@@ -4,6 +4,7 @@ import express from 'express';
 import { connectToDB } from './database';
 
 dotenv.config();
+const app = express();
 
 const { ATLAS_URI } = process.env;
 const PORT = process.env['PORT'] || 5200;
@@ -17,7 +18,6 @@ if (!ATLAS_URI) {
 
 connectToDB(ATLAS_URI)
   .then(() => {
-    const app = express();
     app.use(cors());
 
     app.listen(PORT, () => {
@@ -25,7 +25,9 @@ connectToDB(ATLAS_URI)
     });
 
     app.get('/', (req, res) => {
-      res.send('Hello World');
+      res.json({ message: 'Hello World' });
     });
   })
   .catch((error: any) => console.error(error));
+
+export default app;
